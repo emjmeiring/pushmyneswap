@@ -8,9 +8,9 @@ bigger than an integer, there are duplicates, an instruction don’t exist and/o
 incorrectly formatted.
 */
 #include "checker.h"
+#include "push_swap.h"
 
-/*• wait and read instructions , each instruction will be followed by ’\n’.
-* checker execute instructions e stack received as an argument.*/
+/*• wait and read instructions , each instruction will be followed by ’\n’.-done*/
 int		read_instr(char **instr)
 {
 	int i;
@@ -37,18 +37,54 @@ int		read_instr(char **instr)
 	ft_memdel((void **)&line);
 	return (nbytes);
 }
+
+/** checker execute instructions e stack received as an argument.*/ 
+void	apply_instr(t_stack *a, t_stack *b, char **instr)
+{
+	int i;
+
+	i = 0;
+	while (instr[i])
+	{
+		if (ft_strcmp(instr[i], "sa") == 0)
+			swap(a);
+		else if (ft_strcmp(instr[i], "sb") == 0)
+			swap(b);
+		else if (ft_strcmp(instr[i], "ss") == 0)
+		{	swap(a);	swap(b);	}
+		else if (ft_strcmp(instr[i], "pa") == 0)
+			stack_push_on(a, b);
+		else if (ft_strcmp(instr[i], "pb") == 0)
+			stack_push_on(b, a);
+		else if (ft_strcmp(instr[i], "ra") == 0)
+			shift_up(a);
+		else if (ft_strcmp(instr[i], "sb") == 0)
+			shift_up(b);
+		else if (ft_strcmp(instr[i], "rr") == 0)
+		{	shift_up(a);	shift_up(b);	}
+		else if (ft_strcmp(instr[i], "rra") == 0)
+			shift_down(a);
+		else if (ft_strcmp(instr[i], "rrb") == 0)
+			shift_down(a);
+		else if (ft_strcmp(instr[i], "rrr") == 0)
+		{	shift_down(a);	shift_down(b);	}
+		i++;
+	}
+}
 /*
 • argument is a stack of integers, first at the top of stack. --done
 * If no argument is given checker stops and displays nothing. --done*/
 int		main(int argc, char **argv)
 {
-	int *a;
-	int *b;
+	t_stack *a; // verander in t_stack
+	t_stack *b;
 	int i;
 	char **instr;
 
-	a = (int *)malloc(sizeof(int) * argc);
-	b = (int *)malloc(sizeof(int) * argc);
+	a = (t_stack *)malloc(sizeof(t_stack));
+	b = (t_stack *)malloc(sizeof(t_stack));
+	stack_new(a, argc);
+	stack_new(b, argc);
 	instr = (char **)malloc(sizeof(char *) * 20);
 	i = argc - 2;
 	if (argc <= 1)
@@ -58,12 +94,12 @@ int		main(int argc, char **argv)
 	if(read_instr(instr) != -3) /// need to change -3
 	{
 		//write(1, "woow", 4);
-		//apply_instr(a, b, instr);
+		apply_instr(a, b, instr);
 		print_stacks(a, b, i, instr);
 	}
-	printf("**%s**\n", ft_itoa(-50));
-	free(a);
-	free(b);
+	//printf("**%s**\n", ft_itoa(-50));
+	stack_dispose(a);
+	stack_dispose(b);
 	ft_memdel((void **)instr);
 	free(instr);
 	return (0);

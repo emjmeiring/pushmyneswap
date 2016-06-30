@@ -15,15 +15,12 @@ void	stack_grow(t_stack *s)
 
 void	stack_new(t_stack *s, int size)
 {
-	s->log_len = 0;
+	s->log_len = size - 1;
 	s->alloc_len = size;
-	s->elems = malloc(s->log_len * sizeof(int));
+	s->elems = malloc(size * sizeof(int));
 	assert(s->elems != NULL);
+	s->elems[s->log_len] = 0;
 }
-
-//Not sure if we really need the last two lines because if there are no elems
-//then there is no use to even access the struct's members. For safety though
-//we might as well do it.
 
 void	stack_dispose(t_stack *s)
 {

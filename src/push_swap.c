@@ -1,5 +1,6 @@
 
 #include "checker.h"
+//#include "push_swap.h"
 /*
 
 • The goal is to sort the stack with the minimum possible number of operations.
@@ -18,23 +19,25 @@ a, the smallest number being at the top.
 */
 void	set_instr(char **instr)
 {
-	instr[0] = "ra ";
-	instr[1] = "rra";
-	instr[2] = "rrr";
-	instr[3] = "rsa";
+	instr[0] = "ra";
+	instr[1] = "sa";
+	instr[2] = "pb";
+	instr[3] = "ra";
 	instr[4] = "\0\0\0";
 }
 
 /*push_swap ,arguments of integers.*/
 int		main(int argc, char **argv)
 {
-	int *a;
-	int *b;
+	t_stack *a;
+	t_stack *b;
 	int i;
 	char **instr;
 
-	a = (int *)malloc(sizeof(int)*argc);
-	b = (int *)malloc(sizeof(int)*argc);
+	a = (t_stack *)malloc(sizeof(a));
+	b = (t_stack *)malloc(sizeof(b));
+	stack_new(a, argc);
+	stack_new(b, argc);
 	instr = (char **)malloc(sizeof(char *) * 20);
 	i = 0;
 	if (argc <= 1)
@@ -44,12 +47,12 @@ int		main(int argc, char **argv)
 	set_instr(instr);
 	while (instr[i][0] != '\0')
 	{
-		write(1, instr[i], 3);
+		write(1, instr[i], ft_strlen(instr[i]));
 		write(1, "\n", 1);
 		i++;
 	}
-	free(a);
-	free(b);
+	stack_dispose(a);
+	stack_dispose(b);
 	free(instr);
 	return (0);
 }

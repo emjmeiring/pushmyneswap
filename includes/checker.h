@@ -18,8 +18,9 @@
 #include <string.h>
 #include <unistd.h>
 #include "../libft/libft.h"
+#include "push_swap.h"
 
-int		init_stacks(int *a, int *b, int argc, char **argv);
-void	print_stacks(int *a, int *b, int i, char **instr);
+int		init_stacks(t_stack *a, t_stack *b, int argc, char **argv);
+void	print_stacks(t_stack *a, t_stack *b, int i, char **instr);
 int		read_instr(char **instr);
 #endif

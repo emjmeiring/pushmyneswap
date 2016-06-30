@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: arnovan- <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: jomeirin- <marvin@42.fr>                   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2016/05/25 11:55:33 by arnovan-          #+#    #+#              #
-#    Updated: 2016/06/13 08:13:51 by arnovan-         ###   ########.fr        #
+#    Created: 2016/06/25 11:32:01 by jomeirin-         #+#    #+#              #
+#    Updated: 2016/06/13 08:13:51 by jomeirin-        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,15 +28,15 @@ PATH_SRC= ./src/
 
 PATH_HD= -I includes/
 
-SRC1 = $(PATH_SRC)checker.c $(PATH_SRC)printing.c
-SRC2 = $(PATH_SRC)push_swap.c $(PATH_SRC)printing.c
+SRC1 = $(PATH_SRC)checker.c $(PATH_SRC)printing.c $(PATH_SRC)stack_ops_adv.c $(PATH_SRC)stack_ops_basic.c
+SRC2 = $(PATH_SRC)push_swap.c $(PATH_SRC)printing.c $(PATH_SRC)stack_ops_adv.c $(PATH_SRC)stack_ops_basic.c
 
-OBJ1 = checker.o printing.o
-OBJ2 = push_swap.o printing.o
+OBJ1 = checker.o printing.o stack_ops_adv.o stack_ops_basic.o
+OBJ2 = push_swap.o printing.o stack_ops_adv.o stack_ops_basic.o
 
 $(CHEC):
-	@echo "Compiling binaries..."
-	@make re -C libft/	
+	#@echo "Compiling binaries..."
+	#@make re -C libft/	
 	@$(CC) $(CFLAGS) $(PATH_HD) -c $(SRC1)
 	@$(CC) -o $(CHEC) $(OBJ1) -lm $(INC_LIBFT) 
 	@echo "Compilation was successful!"
@@ -63,10 +63,10 @@ clean:
 	@make -C libft/ clean
 	@echo "Done cleaning!"
 fclean:
-	@echo "Cleaning object files..."
-	@$(RM) $(OBJ)
-	@echo "Cleaning libft object & binary files..."
-	@make -C libft/ fclean
+	#@echo "Cleaning object files..."
+	#@$(RM) $(OBJ)
+	#@echo "Cleaning libft object & binary files..."
+	#@make -C libft/ fclean
 	@echo "Cleaning binaries..."
 	@$(RM) $(CHEC) $(PUSH)
 	@echo "Done cleaning!"

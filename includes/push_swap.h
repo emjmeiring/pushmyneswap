@@ -13,7 +13,7 @@ typedef struct	s_stack
 	int			alloc_len;
 }				t_stack;
 
-void			stack_new(t_stack *s);
+void			stack_new(t_stack *s, int size);
 void			stack_dispose(t_stack *s);
 void			stack_push(t_stack *s, int val);
 int				stack_pop(t_stack *s);
